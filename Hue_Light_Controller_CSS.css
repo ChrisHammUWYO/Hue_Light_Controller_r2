@@ -1,0 +1,102 @@
+/** Hue_Light_Controller_CSS
+Chris Hamm
+HW 13
+21/1/2015
+Updated 2/9/2017
+**/
+
+html {width: 1280px;
+	height: 720px;}
+body {text-align: center;
+	background-color: navy;
+	color: white;}
+
+/**The main header of the webpage div**/
+#Homepage_Main_Header {width: 100%;
+			background-color: rgba(255,255,255,1);
+			color: black;}
+
+/**The homepage Section div **/
+#Homepage_Section {width: 100%;
+			background-color: rgba(255,255,255,0.6);
+			color: black;}
+
+/**Info Window Section div **/
+#Info_Window_Section {width: 100%;
+			background-color: rgba(255,255,255,0.6);
+			color: black;}
+
+/**The Info Window header block**/
+#Info_Window_Header {width: 100%;
+			background-color: rgba(255,255,255,0.9);
+			color: black;}
+
+/**The info window paragraph block **/
+#Info_Window {width: 100%;
+			min-height: 5em;
+			background-color: black;
+			color: white;}
+
+/**Selected Light Settings Section div **/
+.Change_Light_Settings_Header_Section {width: 100%;
+				background-color: rgba(255,255,255,0.6);
+				color: black;}
+
+/**Selected Light Settings Header **/
+#Selected_Light_Settings_Header {width:100%;
+			background-color: rgba(255,255,255,1);
+			color: black;}
+
+/**Selected Light Info div **/
+.Selected_Light_Info {width: 100%;
+			background-color: rgba(255,255,255,0.6);
+			color: black;}
+
+/**Selected Light Info Header **/
+#Selected_Light_Info_Header {width:100%;
+			background-color: rgba(255,255,255,1);
+			color: black;}
+
+/**Selected light info table **/
+#Selected_Light_Info_Table {width: 100%;
+			text-align: left;}
+
+/**Changable Properties Title **/
+#Changable_Properties_Title {text-align: center;}
+
+/**Color Picker Div **/
+.Color_Picker_Div {width: 100%;
+			min-height: 5em;
+			background-color: rgba(255,255,255,0.6);
+			color: black;}
+
+/**Color Picker Header**/
+#Color_Picker_Header {width: 100%;
+			background-color: rgba(255,255,255,1);
+			color: black;}
+
+/**Predefined light colors div **/
+.Predefined_Light_Colors {width: 100%;
+			background-color: rgba(255,255,255,0.6);
+			color: black;}
+
+/**Predefined light color header **/
+#Predefined_Light_Colors_Header {width: 100;
+			background-color: rgba(255,255,255,1);
+			color: black;}
+
+/**Predefined light colors table **/
+#Predefined_Color_Buttons_Table {width: 100%;}
+
+/**Tools and options div **/
+.Tools_and_Options_Div {width: 100%;
+		background-color: rgba(255,255,255,0.6);
+		color: black;}
+
+/**Tools and options Header **/
+#Tools_and_Options_Header {width: 100%;
+			background-color: rgba(255,255,255,1);
+			color: black;}
+
+/**Tools and options table **/
+#Tools_and_Options_Table {width: 100%;}

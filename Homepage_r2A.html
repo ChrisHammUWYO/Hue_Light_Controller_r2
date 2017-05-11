@@ -1,0 +1,150 @@
+<!-- Hue light controller -->
+<!-- Chris Hamm -->
+<!-- HW13 -->
+<!-- CS3160 -->
+<!-- Revision 2A -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hue Light Controller</title>
+	<link rel="stylesheet" type="text/css" href="Hue_Light_Controller_CSS.css">
+	<!-- below: used for compatibility wit old internet explorer browsers -->
+	<!--[if lt IE 9]>
+ 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+	<![endif]-->
+	<!--<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> <!-- this is defining the jquery ajax functions -->
+	<script src="Hue_Light_JS_Functions.js"></script>
+</head>
+<body>
+<div id="Homepage_Section">
+	<div id="Homepage_Main_Header">
+		<h1>Hue Light Controller</h1>
+	</div> <!-- end of div Homepage_Main_Header --> 
+	<form>
+		Bridge IP: 
+		<input type="text" name="Bridge_IP_Input" id="Bridge_IP_Input">
+	</form>
+	<br>
+	<form>
+		Authenticated Username: 
+		<input type="text" name="Authenticated_Username_Input" id="Authenticated_Username_Input">
+	</form>
+	<br>
+	<button type="button" id="Connect_To_Bridge_Button" onclick="extractBridgeInfo()" disabled="true">Connect to Bridge</button>
+	<button type="button" id="Default_Credentials_Button" onclick="useDefaultCredentialsButton()">Connect to Bridge with Default Credentials</button> 
+	<br>
+</div> <!-- end of homepage_Section div -->
+<div id="Info_Window_Section">
+	<h3 id="Info_Window_Header">Info Window</h3>
+	<p id="Info_Window">Enter in the Bridge's IP Address <br>
+	Then enter in the Authenticated Username <br>
+	Finally, Press the 'Get Light(s) Info' Button <br>
+	</p>
+</div> <!-- end of Info window section -->
+<hr>
+<div class="Change_Light_Settings_Section">
+	<div class="Change_Light_Settings_Header_Section">
+		<h4 id="Selected_Light_Settings_Header">Selected Light </h4>
+		<select id="Selected_Light" disabled="true">
+			<option value="Light_1" id="Light_1">sync to bridge first</option>    <!-- index=0; Bulb #1 Porch Left -->
+			<option value="Light_2" id="Light_2">sync to bridge first</option>    <!-- index=1; Bulb #2 Porch Right -->
+			<option value="Light_3" id="Light_3">sync to bridge first</option>    <!-- index=2; Bulb #3 Stairs night light -->
+			<option value="Light_4" id="Light_4">sync to bridge first</option>    <!-- index=3; LightStrips 1 -->
+			<option value="Light_5" id="Light_5">sync to bridge first</option>    <!-- index=4; Bulb #4 Stairs night light -->
+		</select>
+		<button type="button" id="Select_Light_Button" onclick="getSelectedLightInfo()" disabled="true">Select Light</button>
+	</div> <!-- end of change light settings header section div -->
+	<br>
+	<div class="Selected_Light_Info">
+		<h4 id="Selected_Light_Info_Header">Selected Light Information</h4>
+		<table id="Selected_Light_Info_Table" border="0">
+			<tr>
+				<td id="Selected_Light_Number">Light Number: N/A</td>
+				<td id="Selected_Light_Name">Light Name: N/A</td>
+			</tr> <!-- end of row one -->
+			<tr>
+				<td id="Selected_Light_Type">Light Type: N/A</td>
+				<td id="Selected_Light_Model_ID">Model ID: N/A</td>
+			</tr> <!-- end of row two -->
+			<tr>
+				<td id="Selected_Light_Manufacturer_Name">Manufacturer Name: N/A</td>
+				<td id="Selected_Light_SWVersion">SWVersion: N/A</td>
+			</tr> <!-- end of row three -->
+			<tr>
+				<td id="Selected_Light_Unique_ID" colspan="2">Unique ID: N/A</td>
+			</tr> <!-- end of row four -->
+			<tr>
+				<td id="Changable_Properties_Title" colspan="2"><b>Manually Changable Properties</b></td>
+			</tr> <!-- end of row five -->
+			<tr>
+				<td id="Selected_Light_State_On">Turned On (true/false value): <select disabled="true" id="Selected_Light_State_On_Dropdown_Menu">
+																					<option value="true">True</option>
+																					<option value="false">False</option>
+																				</select>
+				</td> <!-- end of Selected Light State on cell -->
+				<td id="Selected_Light_State_Brightness"><form>Brightness (min=0 max=254): <input type="text" name="Selected_Light_State_Brightness_Textbox" id="Selected_Light_State_Brightness_Textbox" disabled="true"></form></td>
+			</tr> <!-- end of row six -->
+			<tr>
+				<td id="Selected_Light_State_Hue"><form>Hue (min=0 max=65535): <input type="text" name="Selected_Light_State_Hue_Textbox" id="Selected_Light_State_Hue_Textbox" disabled="true"></form></td>
+				<td id="Selected_Light_State_Saturation"><form>Saturation (min=0 maxe=254): <input type="text" name="Selected_Light_State_Saturation_Textbox" id="Selected_Light_State_Saturation_Textbox" disabled="true"></form></td>
+			</tr> <!-- end of row seven -->
+			<tr>
+				<td id="Selected_Light_State_Effect">Effect: <select disabled="true" id="Selected_Light_State_Effect_Dropdown_Menu">
+																	<option value="none">None</option>
+																	<option value="colorloop">Color Loop</option>
+															 </select>
+				</td> <!-- end of selected light state effect cell -->
+				<!--<td id="Selected_Light_Color_Temp"><form>Color Temperature (min=2000 max=6500): <input type="text" name="Selected_Light_Color_Temp_Textbox" id="Selected_Light_Color_Temp_Textbox" disabled="true"> K</form></td> -->
+			</tr> <!-- end of row eight -->
+		</table> <!-- end of selected light info table -->
+		<button type="button" id="Apply_Changes_Button" onclick="useApplyChangesButton()" disabled="true">Apply Changes</button> 
+	</div> <!-- end of selected light info div -->
+	
+	<br>
+	<div class="Color_Picker_Div">
+		<h4 id="Color_Picker_Header">Custom Color Selection</h4>
+		<form>
+			Click Here To Choose A Custom Color:
+			<input type="color" id="Color_Picker" disabled="true">
+		</form>
+		<button type="button" id="Get_Color_From_Color_Picker_Button" onclick="getSelectedColorFromColorPicker()" disabled="true">Get Color from color picker </button>
+	</div> <!-- end of color_picker_div -->
+	<div class="Predefined_Light_Colors">
+		<h4 id="Predefined_Light_Colors_Header">Predefined Light Colors:</h4>
+		<table id="Predefined_Color_Buttons_Table">
+			<tr>
+				<td><button type="button" id="Predefined_Red_Color_Button" onclick="useSetColorValueButton('Red')" disabled="true">Red</button></td>
+				<td><button type="button" id="Predefined_Yellow_Color_Button" onclick="useSetColorValueButton('Yellow')" disabled="true">Yellow</button></td>
+				<td><button type="button" id="Predefined_Green_Color_Button" onclick="useSetColorValueButton('Green')" disabled="true">Green</button></td>
+				<td><button type="button" id="Predefined_Blue_Color_Button" onclick="useSetColorValueButton('Blue')" disabled="true">Blue</button></td>
+				<td><button type="button" id="Predefined_Purple_Color_Button" onclick="useSetColorValueButton('Purple')" disabled="true">Purple</button></td>
+				<td><button type="button" id="Predefined_White_Color_Button" onclick="useSetColorValueButton('White')" disabled="true">White</button></td>
+			</tr>
+		</table> <!-- end of predefined color buttons table -->
+	</div> <!-- end of predefined light colors div -->
+	<div class="Tools_and_Options_Div">
+		<h4 id="Tools_and_Options_Header">Tools and Options Menu</h4>
+		<table id="Tools_and_Options_Table">
+			<tr>
+				<td>
+					<button type="button" id="Restore_LightStrip_Colorloop_To_Default_Conditions_Button" onclick="restoreLightstripColorloopToDefaultConditions(false)" disabled="true">Restore LightStrip Colorloop to Default Conditions</button>
+				</td>
+				<td>
+					<button type="button" id="Restore_All_Lights_Back_To_Default_Conditions_Button" onclick="restoreAllLightsBackToDefaultConditions()" disabled="true">Restore all Lights Back to Default Conditions</button>
+				</td>
+				<td>
+					<button type="button" id="Set_Light_Default_Conditions_Button" onclick="setLightDefaultConditions()" disabled="true">Set Light Default Conditions</button>
+				</td>
+			</tr> <!-- end of first table row -->
+			<tr>
+				<td>
+					<button type="button" id="Turn_On_All_Lights_Button" onclick="turnOnAllLightsButton()" disabled="true">Turn On All Lights</button>
+				</td>
+				<td>
+					<button type="button" id="Turn_Off_All_Lights_Button" onclick="turnOffAllLightsButton()" disabled="true">Turn Off All Lights</button>
+				</td>
+			</tr> <!-- end of table row two -->
+		</table> <!-- end of tools and options table -->
+	</div> <!-- end of tools and options div -->
+</body>
+</html>
